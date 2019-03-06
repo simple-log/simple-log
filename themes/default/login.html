@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$page_title}</title>
+<link href="{$domain}{$templates_dir}login.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="top"><a href="{$domain}">← 返回 {$blog_name} 首页</a></div>
+<div class="logo"></div>
+<div class="tishi">{if $notice != ''}
+<div id="notice">{$notice}</div>
+{/if}</div>
+<div class="k">
+<form action="user.php?act=act_login" method="post"  name="form1" id="post_form">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td height="70" colspan="2">用户名：<br />
+ <input class="shuru" name="name" type="text" id="name" size="25"/></td>
+    </tr>
+    <tr>
+      <td height="70" colspan="2">密码：<br />
+    <input class="shuru" name="password" type="password" id="password" size="25" /></td>
+    </tr>
+    <tr>
+      <td height="50" align="left"><input name="safe_url" type="hidden" value="{$safe_url}" />
+        <a href="{$domain}user.php?act=reg">注册？</a></td>
+      <td align="right"><input class="anniu" type="submit" name="button" id="button" value="登录" /></td>
+    </tr>
+  </table>
+</form>
+</div>
+</body>
+</html>

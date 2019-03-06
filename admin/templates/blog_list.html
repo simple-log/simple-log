@@ -1,0 +1,65 @@
+{include file="header.html"}
+{literal}
+<script type="text/javascript"> 
+function checkAll(frm, checkbox)
+{
+	for (i = 0; i < frm.elements.length; i++)
+	{
+		if (frm.elements[i].name == 'blog_arr[]')
+		{
+			frm.elements[i].checked = checkbox.checked;
+		}
+	}
+}
+
+function check(list, obj)
+{
+	var frm = obj.form;
+
+	for (i = 0; i < frm.elements.length; i++)
+	{
+		if (frm.elements[i].name == "action_code[]")
+		{
+			var regx = new RegExp(frm.elements[i].value + "(?!_)", "i");
+
+			if (list.search(regx) > -1) frm.elements[i].checked = obj.checked;
+		}
+	}
+}
+</script>
+{/literal}
+<div class="admin_here">
+<form action="admin.php?act=blog_list" method="post" name="group_form">
+  <input type="text" name="keywords"  value="" />    <input type="submit" name="button" id="button" value="搜索" /></td>
+</form>
+</div>
+<p><form action="admin.php?act=del_blog" method="post" name="group_form">
+<table width="100%" >
+  <tr class="tr1">
+    <td>博客标题</td>
+    <td>添加时间</td>
+    <td>所属分类</td>
+    <td>作者</td>
+    <td>操作</td>
+  </tr>
+  {foreach from=$blog_list item=blog}
+  <tr>
+    <td><input type="checkbox" name="blog_arr[]" value="{$blog.blog_id}"  class="checkbox" /><a href="admin.php?act=edit_blog&id={$blog.blog_id}">{$blog.title}</a></td>
+    <td>{$blog.add_time}</a></td>
+    <td>{$blog.cat_name}</td>
+    <td>{$blog.user_name}</td>
+    <td><a href="{$domainurl}/blog.php?id={$blog.blog_id}" target="_blank" >查看</a> | <a href="admin.php?act=edit_blog&id={$blog.blog_id}" >编辑</a> | <a href="admin.php?act=del_blog&id={$blog.blog_id}" >删除</a> </td>
+  </tr>
+  {/foreach}
+    <tr>
+    <td><input type="checkbox" name="checkall" value="checkbox" onclick="checkAll(this.form, this);" class="checkbox" />全选   
+      <input type="submit" name="button" id="button" value="删除" /></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table></form>
+{include file="page.html"}
+</p>
+{include file="footer.html"}

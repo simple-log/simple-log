@@ -1,0 +1,30 @@
+{include file="header.html"}
+{*日志部分*}
+<div id="content">
+{if $notice != ''}
+<div id="blog_notice">{$notice}</div>
+{/if}
+<div class="pl">
+<form action="user.php?act=edit_profile" method="post"  name="user_reg" id="user_reg">
+<p>
+ 用户名：<br />
+ <input class="name input_all" name="name" type="text" id="name" value="{$user.user_name}" /></p>
+   <p>
+ 密码：<br />
+    <input class="password input_all" type="password" name="password" id="password" />
+   (如果不需要修改，请保留为空)</p>
+    <p>
+ EMAIL：<br />
+    <input class="email input_all" name="email" type="text" id="email" value="{$user.email}" size="50" />
+  </p>
+  <p>
+ 个人主页地址：<br />
+    <input class="url input_all" name="home" type="text" id="home" value="{$user.home}" size="50" />
+  </p>
+
+  <p>
+    <input name="button" type="submit" class="button_all" id="button" value=" " />
+  </p>
+</form>
+</div>
+{include file="footer.html"}

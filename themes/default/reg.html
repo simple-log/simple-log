@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$page_title}</title>
+<link href="{$domain}{$templates_dir}login.css" rel="stylesheet" type="text/css" />
+<script src="{$domain}includes/js/jquery.js"></script>
+</head>
+
+<body>
+<script type="text/javascript">
+var name_notice='用户名不能为空';
+var password_notice='密码不能为空';
+var re_password_notice='两次密码不一致';
+var email_notice='E-MAIL不能为空';
+<!-- {literal} -->
+var result=$('input').val();
+$(document).ready(function()
+{
+   $('input').blur(function(){
+     
+   		if(this.id == 'name'){
+			if(this.value==''){
+				$('#name_notice').html(name_notice);
+			}
+			else{
+				$('#name_notice').html('');
+				p='name='+this.value;
+     			$.ajax({url:'user.php?act=check_name',type:'post', dataType:'json',data:p,success:check_name_back});
+			}
+		}
+		
+		else if (this.id == 'password'){
+			if(this.value==''){
+				$('#pass_notice').html(password_notice);
+			}
+			else{
+				$('#pass_notice').html('');
+			}
+		}
+		
+		else if (this.id == 're_password'){
+			if(this.value!=$('#password').val()){
+				$('#re_pass_notice').html(re_password_notice);
+			}
+			else{
+				$('#re_pass_notice').html('');
+			}
+		}
+		
+		else if (this.id == 'email'){
+			if(this.value==''){
+				$('#email_notice').html(email_notice);
+			}
+			else{
+				$('#email_notice').html('');
+				p='email='+this.value;
+				$.ajax({url:'user.php?act=check_email',type:'post', dataType:'json',data:p,success:check_email_back});
+			}
+		}
+		
+	});
+});
+
+function check_name_back(data)
+{
+	if(data.error==1)
+	{
+		$('#name_notice').html('该用户名已经被注册');
+	}
+	else
+	{
+		$('#name_notice').html('该用户名可以使用');
+	}
+}
+
+function check_email_back(data)
+{
+	if(data.error==1)
+	{
+		$('#email_notice').html('该E-MAIL已经被使用了');
+	}
+	else if (data.error==2)
+	{
+		$('#email_notice').html('请输入正确的E-MAIL');
+	}
+	else {
+		$('#email_notice').html('E-MAIL正确');
+	}
+}
+
+<!-- {/literal} -->
+</script>
+<div class="top"><a href="{$domain}">← 返回 {$blog_name} 首页</a></div>
+<div class="logo"></div>
+<div class="tishi">{if $is_reg eq 1}
+<div id="notice">系统关闭新用户注册</div>
+{else}{if $notice != ''}
+<div id="notice">{$notice}</div>
+{/if}</div>
+<div class="k">
+<form action="user.php?act=act_reg" method="post"  name="user_reg" id="user_reg">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="70" colspan="2">用户名：<span id="name_notice"></span><br />
+  <input class="shuru" name="name" type="text" id="name"  /> </td>
+  </tr>
+  <tr>
+    <td height="70" colspan="2">密码：<span id="pass_notice"></span><br />
+    <input class="shuru" type="password" name="password" id="password" /> </td>
+  </tr>
+  <tr>
+    <td height="70" colspan="2">密码确认：<span id="re_pass_notice"></span><br />
+    <input class="shuru" type="password" name="re_password" id="re_password" /> </td>
+  </tr>
+  <tr>
+    <td height="70" colspan="2">EMAIL：<span id="email_notice"></span><br />
+    <input class="shuru" name="email" type="text" id="email" size="50" /> </td>
+  </tr>
+  <tr>
+    <td height="70" colspan="2">个人主页地址：<br />
+    <input class="shuru" name="home" type="text" id="home" size="50" /></td>
+  </tr>
+  <tr>
+    <td height="50" align="left"><a href="{$domain}user.php?act=login">登录?</a></td>
+    <td align="right"><input class="anniu" type="submit" name="button" id="button" value="提交注册" /></td>
+  </tr>
+</table>
+</form>
+</div>
+{/if}
+
+</body>
+</html>

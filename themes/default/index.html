@@ -1,0 +1,45 @@
+{include file="header.html"}
+{*日志部分*}
+
+<div id="content">
+{if $blog_notice}
+<div id="blog_notice">{$blog_notice}</div>
+{/if}
+{foreach from=$blog_list item=blog}
+<div class="post">
+	<div class="info">
+    <div class="info_l"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="22">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="center"><a href="{$blog.url}#pl">{$blog.comments}</a></td>
+  </tr>
+</table>
+</div>
+    <div class="info_r"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="24" valign="top"><h3 class="title"><a href="{$blog.url}" >{if $blog.is_top eq 1}[置顶]{/if}{$blog.title}</a></h3> </td>
+  </tr>
+  <tr>
+    <td height="20" valign="bottom"><span>发表者：{$blog.user_name}</span><span><a href="{$blog.cat_url}">分类：{$blog.cat_name}</a></span><span>{$blog.add_time}</span>  
+	  <span><a href="{$blog.url}" >阅读[{$blog.views}]</a></span></td>
+  </tr>
+</table>
+</div>
+</div>
+<div class="center">
+{$blog.description}
+</div>
+<div class="tag"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="30" valign="middle">Tags：{$blog.tags}</td>
+    <td align="right" valign="middle"><a href="{$blog.url}">[阅读全文...]</a></td>
+  </tr>
+</table>
+</div>
+  </div>
+{/foreach}
+
+{include file="page.html"}
+{include file="footer.html"}
