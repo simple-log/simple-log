@@ -14,7 +14,7 @@ install step:
 
 1.git clone https://github.com/simple-log/simple-log.git
 
-2.chmod -R 777 your webroot/home;chmod -R 777 your webroot/themes
+2.mv simple-log/* /your webroot/&&cd /your webroot/&&chmod -R 777 home&&chmod -R 777 themes
 
 3.open your domain to start
 
@@ -30,6 +30,6 @@ Simple-Log是一个采用php+mysql+smarty+百度编辑器的博客系统，他�
 
 1.git clone https://github.com/simple-log/simple-log.git
 
-2.chmod -R 777 您的web目录/home;chmod -R 777 您的web目录/themes
+2.mv simple-log/* /您的网站目录/&&cd /您的网站目录/&&chmod -R 777 home&&chmod -R 777 themes
 
 3.打开域名即可开始安装
