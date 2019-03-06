@@ -261,7 +261,7 @@ elseif ($action=='edit_blog')
 
 	if ($row=$db->getrow($sql))
 	{
-		//$row['description']=unprocess_text($row['description']);
+		$row['description']=htmlspecialchars_decode($row['description']);
 		$row['content']=htmlspecialchars_decode($row['content']);
 		$smarty->assign('blog',$row);
 		$admin_privilege=$db->getone('SELECT admin_privilege FROM '.table('user_group')." WHERE group_id='".$_SESSION['group_id']."'");
