@@ -1,35 +1,30 @@
-# simple-log
+Simple-Log 是一个非常快的可以多用户协同写作的博客系统。
 
-simple-log is a php+mysql+smarty blog system
+1.适配PHP7以上版本【支持php5/php7等主流版本】
 
-it allow many people to write blogs
+2.模板设计简单：采用最新版smarty3 模板中没有php代码，无论是转模板还是重新设计模板都是非常简单快捷，几个小时即可完成模板转换
 
-it has a strict system of authority for writers and readers.
+3.简单易懂的插件机制：提供会员注册、博客发布等钩子，简单易懂的插件设计机制
 
-it is very simple and very very very fast
+3.多人联合撰写：后台轻松完成多人联合撰写
 
-the demo is http://demo.simple-log.com
+4.完善的后台权限机制：可以设置不同的会员组后台操作权限，再多的人访问后台联合撰写也没烦恼
 
-install step:
+5.完善的数据备份、恢复：后台支持博客数据的备份和恢复
 
-1.git clone https://github.com/simple-log/simple-log.git
 
-2.mv simple-log/* /your webroot/&&cd /your webroot/&&chmod -R 777 home&&chmod -R 777 themes
+---------------------------------------------------------
 
-3.open your domain to start
+安装步骤如下：
 
----------------------------------------------------------------------------------
+git clone https://github.com/simple-log/simple-log.git
 
-这是一个华丽的分割线
+mv simple-log/* /您的网站目录
 
-Simple-Log是一个采用php+mysql+smarty+百度编辑器的博客系统，他允许多人写作，有非常详细严格的权限体系
+cd /您的网站目录
 
-最重要的是他非常小也非常快，采用百度编辑器
+sudo chmod -R 777 home
 
-安装方法非常简单，直接在官网下载最新版或者
+sudo chmod -R 777 themes
 
-1.git clone https://github.com/simple-log/simple-log.git
-
-2.mv simple-log/* /您的网站目录/&&cd /您的网站目录/&&chmod -R 777 home&&chmod -R 777 themes
-
-3.打开域名即可开始安装
+打开您的网址即可开始安装
