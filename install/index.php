@@ -302,6 +302,9 @@ elseif ($setup=='finish')
 	$session='1440';
 	$hash_secret=substr(md5(time()),5,15);
 
+
+	$time=time();
+
 	//写入配置文件
 	$blog_config="<?php
 
@@ -371,7 +374,7 @@ define('PBBLOG_WS_ADMIN', 'admin');
 	$sql='UPDATE '.table('config')."  SET `value`='".$domain."' WHERE `key`='domain'";
 	$db->query($sql);
 
-	$sql="INSERT INTO ".table('user')." (`user_id`,`user_name`,`password`,`email`,`group_id`,`reg_time`,`last_time`,`reg_ip`,`last_ip`,`visit_count`,`msn`,`qq`,`home` ) VALUES ( '1','".$admin_user."','".md5($admin_pass)."','p@simple-log.com','1','".$time."','".$time."','','','0','','','');
+	$sql="INSERT INTO ".table('user')." (`user_id`,`user_name`,`password`,`email`,`group_id`,`reg_time`,`last_time`,`reg_ip`,`last_ip`,`visit_count`,`msn`,`qq`,`home` ) VALUES ( '1','".$admin_user."','".md5($admin_pass)."','p@simple-log.com','1','".$time."','".$time."',NULL,NULL,NULL,NULL,NULL,NULL);
 ";
 	$db->query($sql);
 
