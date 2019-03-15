@@ -6,7 +6,7 @@ CREATE TABLE `fb_attachments` (
   `type` varchar(10) NOT NULL,
   `add_time` int(10) NOT NULL,
   PRIMARY KEY (`attachment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS fb_blog;
 
@@ -67,7 +67,7 @@ CREATE TABLE `fb_config` (
   `key` varchar(50) NOT NULL,
   `value` text NOT NULL,
   PRIMARY KEY (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO fb_config (`key`,`value` ) VALUES ( 'blog_desc','Simple-Log是基于PHP+MySQL的开源博客系统。'),('blog_keyword','Simple-Log'),('blog_name','Simple-Log'),('cache_lifetime','24'),('comment_safe','0'),('comment_sort','1'),('domain','http://www.simple-log.com/'),('is_cache','0'),('is_reg','0'),('notice','博客通知信息'),('open_comment','0'),('pager_size','6'),('page_size','10'),('rewrite','0'),('template_name','default'),('tj','');
 
@@ -80,7 +80,7 @@ CREATE TABLE `fb_link` (
   `url` varchar(100) NOT NULL,
   `sort` mediumint(8) NOT NULL,
   PRIMARY KEY (`link_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO fb_link (`link_id`,`title`,`desc`,`url`,`sort` ) VALUES ( '1','Simple-Log','Simple-Log官方网站','http://www.simple-log.com','1');
 
@@ -96,7 +96,7 @@ CREATE TABLE `fb_modules` (
   `type` tinyint(1) NOT NULL,
   `plugin_id` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 INSERT INTO fb_modules (`id`,`module_id`,`title`,`desc`,`content`,`sort`,`type`,`plugin_id` ) VALUES ( '1','sysnav','系统导航','系统导航','{insert name=\'member_info\'}','1','1',''),('2','cat','日志分类','日志分类，系统自带模块','        &lt;ul&gt;\r\n		{foreach from=$cat item=cat_val}\r\n			&lt;li&gt;&lt;a href={$cat_val.url} title={$cat_val.cat_desc}&gt;{$cat_val.cat_name}&lt;/a&gt;&lt;/li&gt;\r\n			{if $cat_val.children}\r\n     		  	{foreach from=$cat_val.children item=children}\r\n     		  	&lt;li class=&quot;children&quot;&gt;&lt;a href={$children.url} title={$children.cat_desc}&gt;{$children.cat_name}&lt;/a&gt;&lt;/li&gt;\r\n      		    {/foreach}\r\n  			{/if}\r\n		{/foreach}\r\n		&lt;/ul&gt;','2','1',''),('3','search','搜索','网站搜索，系统自带模块','          &lt;form  method=&quot;get&quot; action=&quot;{$domain}search.php&quot;&gt;\r\n			&lt;input type=&quot;text&quot; name=&quot;s&quot;  size=&quot;10&quot; /&gt;\r\n			&lt;input name=&quot;submit&quot; type=&quot;submit&quot; tabindex=&quot;5&quot; value=&quot;搜索&quot; /&gt;\r\n  		  &lt;/form&gt;','3','1',''),('4','archives','日志归档','日志文件归档，系统自带模块','		&lt;ul&gt;\r\n		{foreach from=$archives item=archives_val key=key}\r\n			&lt;li&gt;&lt;a href={$archives_val.url}&gt;{$archives_val.data}&lt;/a&gt;&lt;/li&gt;\r\n		{/foreach}\r\n		&lt;/ul&gt;','4','1',''),('6','link','友情链接','友情链接，系统自带模块','        &lt;ul&gt;\r\n		{foreach from=$link_list item=link}\r\n			&lt;li&gt;&lt;a href={$link.url} title={$link.desc}&gt;{$link.title}&lt;/a&gt;&lt;/li&gt;\r\n		{/foreach}\r\n		&lt;/ul&gt;','6','1',''),('7','','首页','','index.php','1','2',''),('8','new_article','最新文章','在边栏显示最新文章','\r\n        &lt;ul&gt;\r\n		{foreach from=$new_article item=new_article_val}\r\n			&lt;li&gt;&lt;a href={$new_article_val.url} title={$new_article_val.title}&gt;{$new_article_val.title}&lt;/a&gt;&lt;/li&gt;\r\n		{/foreach}\r\n		&lt;/ul&gt;','10','1','new_article');
 
@@ -114,7 +114,7 @@ CREATE TABLE `fb_page` (
   `status` int(1) NOT NULL,
   `type` int(1) NOT NULL,
   PRIMARY KEY (`page_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS fb_plugins;
 
@@ -128,7 +128,7 @@ CREATE TABLE `fb_plugins` (
   `cp_type` tinyint(1) NOT NULL,
   `add_time` int(10) NOT NULL,
   PRIMARY KEY (`plugin_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO fb_plugins (`plugin_id`,`plugin_name`,`plugin_desc`,`author`,`version`,`plugin_point`,`cp_type`,`add_time` ) VALUES ( 'new_article','最新文章','在边栏显示最新文章','pengwenfei','1.0','1','0','1302985854');
 
@@ -139,7 +139,7 @@ CREATE TABLE `fb_tags` (
   `tag_name` varchar(100) NOT NULL,
   `blog_id` mediumint(8) NOT NULL,
   PRIMARY KEY (`tag_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS fb_user;
 
@@ -150,13 +150,13 @@ CREATE TABLE `fb_user` (
   `email` varchar(60) NOT NULL,
   `group_id` smallint(4) NOT NULL,
   `reg_time` int(10) unsigned NOT NULL DEFAULT '0',
-  `last_time` int(10) NOT NULL,
-  `reg_ip` varchar(15) NOT NULL,
+  `last_time` int(10) DEFAULT  NULL,
+  `reg_ip` varchar(15) DEFAULT  NULL,
   `last_ip` varchar(15) NOT NULL DEFAULT '',
   `visit_count` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `msn` varchar(60) NOT NULL,
-  `qq` varchar(20) NOT NULL,
-  `home` varchar(50) NOT NULL,
+  `msn` varchar(60) DEFAULT  NULL,
+  `qq` varchar(20) DEFAULT  NULL,
+  `home` varchar(50) DEFAULT  NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_name` (`user_name`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
