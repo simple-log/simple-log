@@ -35,6 +35,7 @@ require_once(PBBLOG_ROOT.'/includes/Smarty/libs/Smarty.class.php');					//smarty
 if (!$install_lock)
 {
 	header('location: install/index.php');
+	exit;
 }
 
 
